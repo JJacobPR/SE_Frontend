@@ -1,19 +1,13 @@
-import { useState } from "react";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.scss";
-import Navbar from "../components/Navbar";
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/navbar/Navbar";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const HomeView = () => {
   return (
     <>
-      <div>
-        <Navbar/>  
-      </div>
+      <Navbar />
+      <Outlet />
     </>
   );
-}
+};
 
-export default App;
+export default HomeView;

@@ -1,0 +1,52 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1b2430;
+  padding: 1.25rem 5rem;
+  box-shadow: 0 0.313rem 0.938rem rgba(0, 0, 0, 0.06);
+  height: 100px;
+
+  .logo-wrapper {
+    height: 100%;
+
+    img {
+      max-height: 100%;
+    }
+  }
+}
+
+.nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  li {
+    list-style: none;
+    padding: 0 1.25rem;
+    position: relative;
+
+    &:active,
+    &:hover {
+      color: #4f6d94;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: white;
+      transition: 0.3s ease-in-out;
+
+      &:hover::after {
+        content: "";
+        width: fit-content;
+        height: 2px;
+        background: lime;
+        position: absolute;
+        bottom: -4px;
+        left: 20px;
+      }
+    }
+  }
+}

@@ -2,10 +2,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1b2430;
+  background: #084408;
   padding: 1.25rem 5rem;
   box-shadow: 0 0.313rem 0.938rem rgba(0, 0, 0, 0.06);
-  height: 100px;
+  height: 70px;
 
   .logo-wrapper {
     height: 100%;
@@ -28,7 +28,7 @@ nav {
 
     &:active,
     &:hover {
-      color: #4f6d94;
+      color: rgb(72, 151, 69);
     }
 
     a {
@@ -38,14 +38,14 @@ nav {
       color: white;
       transition: 0.3s ease-in-out;
 
-      &:hover::after {
-        content: "";
-        width: fit-content;
-        height: 2px;
-        background: lime;
-        position: absolute;
-        bottom: -4px;
-        left: 20px;
+      &:hover {
+        // content: "";
+        // width: fit-content;
+        // height: 2px;
+        color: rgb(72, 151, 69);
+        // position: absolute;
+        // bottom: -4px;
+        // left: 20px;
       }
     }
   }

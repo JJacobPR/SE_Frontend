@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import store from "./store/store.js";
 import { Provider } from "react-redux";
 import "./index.scss";
+import RegisterView from "./views/RegisterView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "login",
         element: <LoginView />,
       },
+      {
+        path: "register",
+        element: <RegisterView/>
+      }
     ],
   },
 ]);

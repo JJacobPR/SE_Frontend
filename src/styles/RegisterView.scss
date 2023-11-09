@@ -1,3 +1,12 @@
+.RegisterSite {
+    background-image: url("../assets/img/background.jpg");
+    height:100vb;
+    width: 100%;
+    margin: auto auto;
+    background-position: right center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
 
 .RegisterMain {
     background-color: #ffffff;
@@ -7,7 +16,7 @@
     margin-right: auto;
     margin-left: auto;
     margin-top: -400px;
-    max-width: 400px;
+    max-width: 420px;
     padding: 20px;
     text-align: center;
   }

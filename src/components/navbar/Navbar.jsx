@@ -21,7 +21,7 @@ function Navbar() {
       <div>
         <ul className={styles["nav-main"]}>
           <li>
-            <Link to="hub">Hub</Link>
+            <Link to="profile">Chat</Link>
           </li>
 
           <li>

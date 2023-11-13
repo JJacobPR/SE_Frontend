@@ -10,6 +10,14 @@ import { Provider } from "react-redux";
 import "./index.scss";
 import RegisterView from "./views/RegisterView.jsx";
 
+import axios from 'axios';
+import ProfileView from "./views/ProfileView.jsx";
+
+axios.defaults.baseURL = ' https://se-test-server.it-core.fun/';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.withCredentials = true;
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "hub",
         element: <HubView />,
+      },
+      {
+        path: "profile",
+        element: <ProfileView/>
       },
       {
         path: "account",

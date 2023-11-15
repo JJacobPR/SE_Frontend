@@ -5,7 +5,7 @@ class LocalStorage {
     }
 
     static GetActiveUser() {
-        let validUntil = new Date(localStorage.getItem('authValidUntil'));
+        let validUntil = new Date(parseInt(localStorage.getItem('authValidUntil'), 10));
         let now = Date.now();
         
         if (validUntil - now < 0) {

@@ -1,0 +1,50 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+
+    h2 {
+        padding-bottom: 5px;
+    }
+
+    .edit {
+        flex-grow: 1;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 5px;
+        justify-content: center;
+
+        a {
+            text-align: center;
+            text-decoration: none;
+
+            &:hover {
+                color: rgb(23, 57, 21);
+            }
+        }
+
+        button {
+            flex-grow: 1;
+            text-decoration: none;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            padding: 8px;
+            font-weight: bold;
+            display: block;
+
+            transition: color 0.2s;
+
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(23, 57, 21);
+
+                background-color: rgb(72, 151, 69);
+            }
+        }
+    }
+}

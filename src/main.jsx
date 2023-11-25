@@ -2,6 +2,7 @@ import './websocket.js';
 
 import React from "react";
 import ReactDOM from "react-dom/client";
+import NpcView from "./views/NpcView.jsx";
 import HomeView from "./views/HomeView.jsx";
 import HubView from "./views/HubView.jsx";
 import AccountView from "./views/AccountView.jsx";
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterView/>
+      },
+      {
+        path: "npc",
+        element: <NpcView/>
       }
     ],
   },

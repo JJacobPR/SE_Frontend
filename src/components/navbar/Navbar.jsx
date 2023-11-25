@@ -21,6 +21,10 @@ function Navbar() {
       <div>
         <ul className={styles["nav-main"]}>
           <li>
+            <Link to="npc">NPC</Link>
+          </li>
+
+          <li>
             <Link to="profile">Chat</Link>
           </li>
 

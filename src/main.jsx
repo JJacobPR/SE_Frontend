@@ -1,3 +1,5 @@
+import './websocket.js';
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import HomeView from "./views/HomeView.jsx";
@@ -17,6 +19,19 @@ axios.defaults.baseURL = ' https://se-test-server.it-core.fun/';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.defaults.withCredentials = true;
+
+// Example how to use (works with current version of the server)
+window.channel = Echo.channel('my-channel');
+
+var channel = Echo.channel('my-channel');
+
+channel.subscribed(function(data) {
+  console.info("Websockets are working!");
+});
+
+channel.listen('.my-event', function(data) {
+  alert(JSON.stringify(data));
+});
 
 const router = createBrowserRouter([
   {

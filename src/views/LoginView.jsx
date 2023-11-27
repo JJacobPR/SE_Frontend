@@ -28,7 +28,7 @@ class LoginView extends React.Component {
                             <input type="password" name="password" autoComplete="on" />
                             </label>
                         </div>
-                        <button class="button1" >Sign in <FontAwesomeIcon icon={faRightToBracket} /></button>
+                        <button className="button1" >Sign in <FontAwesomeIcon icon={faRightToBracket} /></button>
                     </form>
                     
                     <div className="ForgotPassHref">

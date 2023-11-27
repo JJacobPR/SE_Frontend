@@ -2,7 +2,7 @@ import styles from "./Navbar.module.scss";
 import logo from "../../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
@@ -47,7 +47,8 @@ function Navbar() {
                  Logout
               </Link>
             </li>  
-          }    
+          } 
+          <li><FontAwesomeIcon icon={faVolumeHigh}/><a> Volume</a></li>   
         </ul>
       </div>
     </nav>

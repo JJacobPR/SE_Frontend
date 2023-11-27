@@ -1,5 +1,7 @@
 import RedirectionHelper from "../helpers/RedirectionHelper";
-import React, { useState } from 'react';
+import React from 'react';
+import LocalStorage from '../helpers/LocalStorage';
+import LeftSidebar from "../components/left_sidebar/LeftSidebar";
 
 class HubView extends React.Component {
   // componentDidMount() {
@@ -10,8 +12,12 @@ class HubView extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Hub</p>
+      <div style={{ display: 'flex' }}>
+        <LeftSidebar />
+        <div style={{ flex: 1 }}>
+          <p>Hub</p>
+          {/* Rest of the hub content */}
+        </div>
       </div>
     );
   }

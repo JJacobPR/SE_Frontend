@@ -15,17 +15,27 @@ class Navbar extends React.Component {
   
   constructor(props) {
     super(props);
-
     this.state = {
       muted: false
     }
   }
 
+  muteMe(elem) {
+    elem.pause();
+  }
+  
+  unmuteMe(elem) {
+    elem.play();
+  }
+
+
   Mute = () => {
     if(this.state.muted === false) {
+      document.querySelectorAll("video, audio").forEach((elem) => this.muteMe(elem));
       this.setState({muted: true});
       console.log("Muted");
     } else {
+      document.querySelectorAll("video, audio").forEach((elem) => this.unmuteMe(elem));
       this.setState({muted: false});
       console.log("Unmuted")
     }

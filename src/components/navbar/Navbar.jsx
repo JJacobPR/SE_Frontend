@@ -31,10 +31,19 @@ class Navbar extends React.Component {
     }
   }
 
+  onLogout = () => {
+    LocalStorage.LogoutUser();
+  }
+
   loginHandler = () => {
     dispatch(increment())
     console.log(`Login Clicked:${count}`)
   };
+
+  onLogout = () => {
+    LocalStorage.LogoutUser();
+    console.log("Logged out")
+  }
 
   render() {
   return (
@@ -61,7 +70,7 @@ class Navbar extends React.Component {
           }
           { LocalStorage.IsUserLogged() == true &&
             <li>
-              <Link to="login" onClick={loginHandler}>
+              <Link to="login" onClick={this.onLogout}>
                  Logout
               </Link>
             </li>  

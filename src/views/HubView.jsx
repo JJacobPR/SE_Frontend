@@ -4,11 +4,11 @@ import LocalStorage from '../helpers/LocalStorage';
 import LeftSidebar from "../components/left_sidebar/LeftSidebar";
 
 class HubView extends React.Component {
-  componentDidMount() {
-    if (!LocalStorage.IsUserLogged()) {
-      RedirectionHelper.Redirect('/login');
-    }
-  }
+  // componentDidMount() {
+  //   if (!LocalStorage.IsUserLogged()) {
+  //     RedirectionHelper.Redirect('/login');
+  //   }
+  // }
 
   render() {
     return (

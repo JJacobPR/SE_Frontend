@@ -4,6 +4,11 @@ import '../index.scss';
 import axios from "axios";
 import LocalStorage from '../helpers/LocalStorage';
 import RedirectionHelper from '../helpers/RedirectionHelper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 class AccountView extends React.Component {
 
@@ -22,11 +27,17 @@ class AccountView extends React.Component {
       }
   }
 
+    // componentDidMount() {
+  //   if (!LocalStorage.IsUserLogged()) {
+  //     RedirectionHelper.Redirect('/login');
+  //   }
+  // }
+
   render() {
   return (
     <div className="AccountSite">
         <div className="MyAccountMain">
-            <h2>My account</h2>
+            <h2>My account <FontAwesomeIcon icon={faUserCircle} beat/></h2>
             <form>
                 <div className="UserName">
                     <label>Name
@@ -57,9 +68,9 @@ class AccountView extends React.Component {
                 </div>
             </form>
             
-            <button className="EditBtn" > Edit </button>
-            <button className="SaveBtn" > Save </button>
-            <button className="DeleteBtn"> Delete account </button>
+            <button className="EditBtn" > Edit <FontAwesomeIcon icon={faPenToSquare} /></button>
+            <button className="SaveBtn" > Save <FontAwesomeIcon icon={faFloppyDisk} disabled = {this.state.disabled}/></button>
+            <button className="DeleteBtn"> Delete account <FontAwesomeIcon icon={faTrash} /></button>
         </div>
     </div>
     );

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import "../styles/LoginView.scss";
 import "../index.scss";
 import superhero from "../assets/img/eco-man.svg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 class LoginView extends React.Component {
   render() {
@@ -11,7 +15,7 @@ class LoginView extends React.Component {
           <img className="superHero" src={superhero}/>
         </div>
                 <div className="LoginMain">
-                    <h2>We need our superhero!</h2>
+                    <h2>We need our superhero! <FontAwesomeIcon icon={faRightToBracket} beat/></h2>
                     <form>
                         <div className="LoginMail">
                             <label>Email
@@ -24,15 +28,15 @@ class LoginView extends React.Component {
                             <input type="password" name="password" autoComplete="on" />
                             </label>
                         </div>
-                        <button class="button1" >Sign in</button>
+                        <button class="button1" >Sign in <FontAwesomeIcon icon={faRightToBracket} /></button>
                     </form>
                     
                     <div className="ForgotPassHref">
-                        <a href="/" >Forgot Password?</a>
+                        <a href="/" >Forgot Password? <FontAwesomeIcon icon={faEnvelope} /></a>
                     </div>
                     
                     <div className="RegisterHref">
-                        <a href="/register">Sign up</a>
+                        <a href="/register">Sign up <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
                     </div>
                 </div>
             </div>

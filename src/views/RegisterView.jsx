@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import "../styles/RegisterView.scss";
 import "../index.scss";
 import superhero from "../assets/img/eco-man.svg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 class RegisterView extends React.Component {
     render() {
@@ -33,7 +35,7 @@ class RegisterView extends React.Component {
                                 <input type="password" name="password_confirmation" autoComplete="on"/>
                                 </label>
                             </div>
-                            <button className="button">Sign up</button>
+                            <button className="button">Sign up <FontAwesomeIcon icon={faRightToBracket} /></button>
                         </form>
                         
                     </div>

@@ -27,6 +27,12 @@ class AccountView extends React.Component {
       }
   }
 
+    // componentDidMount() {
+  //   if (!LocalStorage.IsUserLogged()) {
+  //     RedirectionHelper.Redirect('/login');
+  //   }
+  // }
+
   render() {
   return (
     <div className="AccountSite">

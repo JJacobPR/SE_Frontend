@@ -9,97 +9,80 @@ import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import LocalStorage from "../../helpers/LocalStorage";
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      muted: true,
-    };
-  }
+const Navbar = (props) => {
+  const [muted, updateMuted] = useState(true);
 
-  muteMe(elem) {
+  const muteMe = (elem) => {
     elem.pause();
-  }
+  };
 
-  unmuteMe(elem) {
+  const unmuteMe = (elem) => {
     elem.play();
-  }
+  };
 
-  Mute = () => {
-    if (this.state.muted === false) {
-      document.querySelectorAll("video, audio").forEach((elem) => this.muteMe(elem));
-      this.setState({ muted: true });
-      console.log("Muted");
+  const Mute = () => {
+    if (muted === false) {
+      document.querySelectorAll("video, audio").forEach((elem) => muteMe(elem));
+      updateMuted(true);
     } else {
-      document.querySelectorAll("video, audio").forEach((elem) => this.unmuteMe(elem));
-      this.setState({ muted: false });
-      console.log("Unmuted");
+      document.querySelectorAll("video, audio").forEach((elem) => unmuteMe(elem));
+      updateMuted(false);
     }
   };
 
-  onLogout = () => {
+  const onLogout = () => {
     LocalStorage.LogoutUser();
   };
 
-  loginHandler = () => {
-    dispatch(increment());
-    console.log(`Login Clicked:${count}`);
-  };
+  const loginHandler = () => {};
 
-  onLogout = () => {
-    LocalStorage.LogoutUser();
-    console.log("Logged out");
-  };
+  return (
+    <nav>
+      <Link className={styles["logo-wrapper"]} to="hub">
+        <img src={logo} />
+      </Link>
+      <div>
+        <ul className={styles["nav-main"]}>
+          <li>
+            <FontAwesomeIcon icon={faComments} />
+            <Link to="profile">Forum</Link>
+          </li>
 
-  render() {
-    return (
-      <nav>
-        <Link className={styles["logo-wrapper"]} to="hub">
-          <img src={logo} />
-        </Link>
-        <div>
-          <ul className={styles["nav-main"]}>
+          <li>
+            <FontAwesomeIcon icon={faUserCircle} />
+            <Link to="account">My Account</Link>
+          </li>
+          {LocalStorage.IsUserLogged() == false && (
             <li>
-              <FontAwesomeIcon icon={faComments} />
-              <Link to="profile">Forum</Link>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              <Link to="login" onClick={loginHandler}>
+                Login
+              </Link>
             </li>
-
+          )}
+          {LocalStorage.IsUserLogged() == true && (
             <li>
-              <FontAwesomeIcon icon={faUserCircle} />
-              <Link to="account">My Account</Link>
+              <Link to="login" onClick={onLogout}>
+                Logout
+              </Link>
             </li>
-            {LocalStorage.IsUserLogged() == false && (
-              <li>
-                <FontAwesomeIcon icon={faRightToBracket} />
-                <Link to="login" onClick={this.loginHandler}>
-                  Login
-                </Link>
-              </li>
-            )}
-            {LocalStorage.IsUserLogged() == true && (
-              <li>
-                <Link to="login" onClick={this.onLogout}>
-                  Logout
-                </Link>
-              </li>
-            )}
-            {this.state.muted == false && (
-              <li>
-                <FontAwesomeIcon icon={faVolumeHigh} />
-                <a onClick={this.Mute}>Mute</a>
-              </li>
-            )}
-            {this.state.muted == true && (
-              <li>
-                <FontAwesomeIcon icon={faVolumeXmark} />
-                <a onClick={this.Mute}>Unmute</a>
-              </li>
-            )}
-          </ul>
-        </div>
-      </nav>
-    );
-  }
-}
+          )}
+          {muted == false && (
+            <li>
+              <FontAwesomeIcon icon={faVolumeHigh} />
+              <a onClick={Mute}>Mute</a>
+            </li>
+          )}
+          {muted == true && (
+            <li>
+              <FontAwesomeIcon icon={faVolumeXmark} />
+              <a onClick={Mute}>Unmute</a>
+            </li>
+          )}
+        </ul>
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;

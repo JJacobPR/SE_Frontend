@@ -1,0 +1,19 @@
+.popupDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // semi-transparent background
+    display: 'flex';
+    align-items: center;
+    justify-content: center;
+    z-index: 1000 // Ensure it's in front of other elements
+}
+.popup {
+    background-color: white;
+    padding: 10px;
+    margin: 50px;
+    border-radius: 8px;
+    z-index: 1001 // Ensure it's in front of the backdrop
+}

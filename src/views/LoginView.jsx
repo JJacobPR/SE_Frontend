@@ -41,7 +41,6 @@ const LoginView = () => {
             Forgot Password? <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>
-
         <div className="RegisterHref">
           <a href="/register">
             Sign up <FontAwesomeIcon icon={faArrowUpRightFromSquare} />

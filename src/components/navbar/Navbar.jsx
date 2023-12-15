@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import LocalStorage from "../../helpers/LocalStorage";
@@ -34,8 +35,6 @@ const Navbar = (props) => {
     LocalStorage.LogoutUser();
   };
 
-  const loginHandler = () => {};
-
   return (
     <nav>
       <Link className={styles["logo-wrapper"]} to="hub">
@@ -43,6 +42,10 @@ const Navbar = (props) => {
       </Link>
       <div>
         <ul className={styles["nav-main"]}>
+          <li>
+          <FontAwesomeIcon className="icon" icon={faGamepad} />
+          <Link to="hub">Play</Link>
+          </li>
           <li>
             <FontAwesomeIcon className="icon" icon={faComments} />
             <Link to="profile">Forum</Link>
@@ -55,7 +58,7 @@ const Navbar = (props) => {
           {LocalStorage.IsUserLogged() == false && (
             <li>
               <FontAwesomeIcon className="icon" icon={faRightToBracket} />
-              <Link to="login" onClick={loginHandler}>
+              <Link to="login" >
                 Login
               </Link>
             </li>

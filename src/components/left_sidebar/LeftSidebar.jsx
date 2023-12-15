@@ -21,13 +21,14 @@ function LeftSidebar() {
 
   const userData = {
     uuid: "db233b11-f7a7-412b-a660-6450e5d26c1d",
-    name: "coolname321",
+    name: "Player 1",
     avatar: null,
     about: null,
     email: "test2@gmail.com",
-    level: 5,
+    level: 1,
     experience: 20,
     anonymous: false,
+    friendCode: "132DCA",
     friends: [
       {
         uuid: "bfc273e2-e26c-4b05-8773-9e44d03f1ec8",
@@ -64,9 +65,7 @@ function LeftSidebar() {
     <div className={styles.sidebar}>
       <ul>
         <div>
-          <div className={styles.profile}>
-            <ProfilePreview userData={userData} />
-          </div>
+          <ProfilePreview userData={userData} />
           <div className={styles.friendlist}>
             <h2>Friends</h2>
             <ul>

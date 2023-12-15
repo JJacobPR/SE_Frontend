@@ -44,17 +44,17 @@ const Navbar = (props) => {
       <div>
         <ul className={styles["nav-main"]}>
           <li>
-            <FontAwesomeIcon icon={faComments} />
+            <FontAwesomeIcon className="icon" icon={faComments} />
             <Link to="profile">Forum</Link>
           </li>
 
           <li>
-            <FontAwesomeIcon icon={faUserCircle} />
+            <FontAwesomeIcon className="icon" icon={faUserCircle} />
             <Link to="account">My Account</Link>
           </li>
           {LocalStorage.IsUserLogged() == false && (
             <li>
-              <FontAwesomeIcon icon={faRightToBracket} />
+              <FontAwesomeIcon className="icon" icon={faRightToBracket} />
               <Link to="login" onClick={loginHandler}>
                 Login
               </Link>
@@ -69,13 +69,13 @@ const Navbar = (props) => {
           )}
           {muted == false && (
             <li>
-              <FontAwesomeIcon icon={faVolumeHigh} />
+              <FontAwesomeIcon className="icon" icon={faVolumeHigh} />
               <a onClick={Mute}>Mute</a>
             </li>
           )}
           {muted == true && (
             <li>
-              <FontAwesomeIcon icon={faVolumeXmark} />
+              <FontAwesomeIcon className="icon" icon={faVolumeXmark} />
               <a onClick={Mute}>Unmute</a>
             </li>
           )}

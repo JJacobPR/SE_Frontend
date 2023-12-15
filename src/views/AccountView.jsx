@@ -20,11 +20,11 @@ const AccountView = (props) => {
   const [passwordConfirmation, updatePasswordConfirmation] = useState("");
   const [disabled, updateDisabled] = useState(true);
 
-  useEffect(() => {
-    if (!LocalStorage.IsUserLogged()) {
-      RedirectionHelper.Redirect("/login");
-    }
-  });
+  // useEffect(() => {
+  //   if (!LocalStorage.IsUserLogged()) {
+  //     RedirectionHelper.Redirect("/login");
+  //   }
+  // });
 
   return (
     <div className="AccountSite">

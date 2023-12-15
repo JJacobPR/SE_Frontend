@@ -1,5 +1,5 @@
 .sidebar {
-  width: 200px;
+  width: 400px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 2px solid #084408;
@@ -13,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    padding-bottom: 30px;
   }
 
   .friendlist {
@@ -30,20 +31,18 @@
     }
   }
 
-  div>h2 {
+  div > h2 {
     color: #084408;
 
     font-size: 1.3rem;
   }
 
-
-  div>h3 {
+  div > h3 {
     color: #0b5a0b;
 
     margin-bottom: 2px;
     font-size: 1rem;
   }
-
 
   ul {
     align-items: center;
@@ -70,7 +69,7 @@
       }
 
       .friend {
-        flex-direction: 'row';
+        flex-direction: "row";
         overflow: hidden;
         justify-content: center;
         align-items: center;
@@ -90,10 +89,9 @@
       }
 
       .details {
-        flex-direction: 'column';
+        flex-direction: "column";
         overflow: hidden;
       }
-
 
       .startChatLink {
         align-self: center;
@@ -107,9 +105,7 @@
         &:hover {
           background-color: rgb(72, 151, 69);
         }
-
       }
-
     }
   }
 }

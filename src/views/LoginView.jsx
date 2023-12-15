@@ -6,8 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const LoginView = () => {
+  const [email, updateEmail] = useState("");
+  const [password, updatePassword] = useState("");
+  const navigate = useNavigate();
+
+  const loginHandler = (event) => {
+    event.preventDefault();
+    if (email === "test@test.gmail" && password === "test") navigate("/hub");
+  };
+
   return (
     <div className="LoginSite">
       <div>
@@ -17,18 +27,18 @@ const LoginView = () => {
         <h2>
           We need our superhero! <FontAwesomeIcon icon={faRightToBracket} beat />
         </h2>
-        <form>
+        <form onSubmit={loginHandler}>
           <div className="LoginMail">
             <label>
               Email
-              <input type="text" name="mail" autoComplete="on" />
+              <input onChange={(e) => updateEmail(e.target.value)} type="text" name="mail" autoComplete="on" />
             </label>
           </div>
 
           <div className="LoginPass">
             <label>
               Password
-              <input type="password" name="password" autoComplete="on" />
+              <input onChange={(e) => updatePassword(e.target.value)} type="password" name="password" autoComplete="on" />
             </label>
           </div>
           <button className="button1">
@@ -41,7 +51,6 @@ const LoginView = () => {
             Forgot Password? <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>
-
         <div className="RegisterHref">
           <a href="/register">
             Sign up <FontAwesomeIcon icon={faArrowUpRightFromSquare} />

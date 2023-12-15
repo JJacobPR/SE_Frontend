@@ -5,8 +5,8 @@ function Dialogue(props) {
     return (props.trigger) && (
       <div className={styles["popupDiv"]}>
           <div className={styles["popup"]}>
-            This is an example dialogue popup
-              <button className={styles["closebtn"]} onClick={() => props.setTrigger(false)}>close</button>
+            {props.children}
+            <button className={styles["closebtn"]} onClick={() => props.setTrigger(false)}>close</button>
           </div>
       </div>
     );

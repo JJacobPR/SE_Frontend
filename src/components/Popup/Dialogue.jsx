@@ -6,7 +6,7 @@ function Dialogue(props) {
       <div className={styles["popupDiv"]}>
           <div className={styles["popup"]}>
             This is an example dialogue popup
-              <button className="close-btn" onClick={() => props.setTrigger(false)}>close</button>
+              <button className={styles["closebtn"]} onClick={() => props.setTrigger(false)}>close</button>
           </div>
       </div>
     );

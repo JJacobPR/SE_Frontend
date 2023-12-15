@@ -17,7 +17,7 @@ class NpcView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          popup: true
+          popup: false
         };
       }
 

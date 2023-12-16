@@ -6,6 +6,7 @@ import redbird from "../assets/img/npc/redbird.png";
 import splashspeed from "../assets/img/npc/splashspeed.png";
 
 import Dialogue from '../components/Popup/Dialogue';
+import Notifications from '../components/Notifications/Notifications';
 
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
@@ -52,6 +53,7 @@ class NpcView extends React.Component {
                         </CardContent>
                     </Card>
                 </Box>
+                <Notifications></Notifications>
             </div>
         );
     }

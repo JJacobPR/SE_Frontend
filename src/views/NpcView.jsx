@@ -21,9 +21,11 @@ class NpcView extends React.Component {
         super(props);
         this.state = {
             popupQuiz: false,
+            popupQuest: false,
             quizData: null,
-            index: 0,
+            quizIndex: 0,
             points: 0,
+            number: 0,
             email: 'fk@gmail.com',
             password: 'strongpassword123',
         };
@@ -53,6 +55,10 @@ class NpcView extends React.Component {
         this.setState({ popupQuiz: value });
     };
 
+    setTriggerForQuest = (value) => {
+        this.setState({ popupQuest: value });
+    };
+
     onGetQuiz = () => {
         axios.get('/api/quizzes/getRandom', {
                 headers: {
@@ -61,7 +67,7 @@ class NpcView extends React.Component {
             })
             .then((response) => {
                 const quizData = response.data.data;
-                this.setState({ quizData, popupQuiz: true, index: 0, points: 0 });
+                this.setState({ quizData, popupQuiz: true, quizIndex: 0, points: 0 });
                 console.log(quizData);
             })
             .catch((error) => {
@@ -70,15 +76,17 @@ class NpcView extends React.Component {
     };
 
     handleAnswer = (correct, id) => {
-        if (correct === id) {
+        this.setState({ number: id});
+        if (correct === this.state.number) {
             this.setState((prevState) => ({
                 points: prevState.points + 50,
             }));
         }
         console.log(correct);
         console.log(id);
+        console.log(this.state.number);
         this.setState((prevState) => ({
-            index: prevState.index + 1
+            quizIndex: prevState.quizIndex + 1
         }));
         console.log(this.state.points);
     };
@@ -86,14 +94,21 @@ class NpcView extends React.Component {
     render() {
         return (
             <div>
+                <button onClick={() => this.onLogin()}>Log in example</button>
                 <Dialogue
                     trigger={this.state.popupQuiz}
                     setTrigger={this.setTriggerForQuiz}
-                    question={this.state.quizData?.questions[this.state.index]}
-                    handleAnswer={() => this.handleAnswer(this.state.quizData?.questions[this.state.index]?.correct)}
+                    question={this.state.quizData?.questions[this.state.quizIndex]}
+                    handleAnswer={(number) => this.handleAnswer(this.state.quizData?.questions[this.state.quizIndex]?.correct, number)}
                 />
+                <Dialogue
+                    trigger={this.state.popupQuest}
+                    setTrigger={this.setTriggerForQuest}
+                >
+                Your Quests
+                </Dialogue>
                 <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
-                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTrigger(true)}>
+                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTriggerForQuest(true)}>
                         <CardCover><img src={greenleaf} srcSet="" loading="lazy" alt=""/>
                         </CardCover>
                         <CardContent>
@@ -115,7 +130,6 @@ class NpcView extends React.Component {
                         </CardContent>
                     </Card>
                 </Box>
-                <button onClick={() => this.onLogin()}></button>
                 <Notifications></Notifications>
             </div>
         );

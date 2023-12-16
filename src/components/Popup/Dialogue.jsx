@@ -11,6 +11,7 @@ function Dialogue(props) {
     trigger && (
      <div className={styles.popupDiv}>
        <div className={styles.popup}>
+       {props.children}
           {question && (
             <div>
               <div>{question.question}</div>

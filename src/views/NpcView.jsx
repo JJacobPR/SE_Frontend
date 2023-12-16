@@ -1,5 +1,7 @@
-import { SvgIcon } from '@mui/material';
+import { Dialog, SvgIcon } from '@mui/material';
 import React, { useState } from 'react';
+import axios from 'axios';
+import LocalStorage from '../helpers/LocalStorage';
 
 import greenleaf from "../assets/img/npc/greenleaf.png";
 import redbird from "../assets/img/npc/redbird.png";
@@ -17,18 +19,78 @@ class NpcView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          popup: false
+            popupQuiz: false,
+            quizData: null,
+            index: 0,
+            points: 0,
+            email: 'fk@gmail.com',
+            password: 'strongpassword123',
         };
-      }
-
-    setTrigger = (value) => {
-        this.setState({popup: value})
     }
 
+    onLogin = () => {
+        axios.get('/api/csrf-cookie', {
+        })
+        .then(() => {
+            axios.post('/api/login', {
+                email: this.state.email,
+                password: this.state.password
+            })
+        .then(() => {
+            axios.get('/api/user', {
+            }).then((response) => {
+                LocalStorage.SetActiveUser(response.data.data.uuid);
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    });
+    };
+
+    setTriggerForQuiz = (value) => {
+        this.setState({ popupQuiz: value });
+    };
+
+    onGetQuiz = () => {
+        axios.get('/api/quizzes/getRandom', {
+                headers: {
+                    Accept: 'application/json',
+                },
+            })
+            .then((response) => {
+                const quizData = response.data.data;
+                this.setState({ quizData, popupQuiz: true, index: 0, points: 0 });
+                console.log(quizData);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    handleAnswer = (correct, id) => {
+        if (correct === id) {
+            this.setState((prevState) => ({
+                points: prevState.points + 50,
+            }));
+        }
+        console.log(correct);
+        console.log(id);
+        this.setState((prevState) => ({
+            index: prevState.index + 1
+        }));
+        console.log(this.state.points);
+    };
+
     render() {
-        return(
+        return (
             <div>
-                <Dialogue trigger={this.state.popup} setTrigger={this.setTrigger}/>
+                <Dialogue
+                    trigger={this.state.popupQuiz}
+                    setTrigger={this.setTriggerForQuiz}
+                    question={this.state.quizData?.questions[this.state.index]}
+                    handleAnswer={() => this.handleAnswer(this.state.quizData?.questions[this.state.index]?.correct)}
+                />
                 <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
                     <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTrigger(true)}>
                         <CardCover><img src={greenleaf} srcSet="" loading="lazy" alt=""/>
@@ -37,7 +99,7 @@ class NpcView extends React.Component {
                         <Typography level="body-lg" fontWeight="bold" textColor="black" mt={{ xs: 12, sm: 18 }}>Green Leaf</Typography>
                         </CardContent>
                     </Card>
-                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTrigger(true)}>
+                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => {this.setTriggerForQuiz(true); this.onGetQuiz();}}>
                         <CardCover><img src={redbird} srcSet="" loading="lazy" alt=""/>
                         </CardCover>
                         <CardContent>
@@ -52,6 +114,7 @@ class NpcView extends React.Component {
                         </CardContent>
                     </Card>
                 </Box>
+                <button onClick={() => this.onLogin()}></button>
             </div>
         );
     }

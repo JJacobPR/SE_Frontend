@@ -23,7 +23,9 @@ class NpcView extends React.Component {
             popupQuiz: false,
             popupQuest: false,
             quizData: null,
+            questData: null,
             quizIndex: 0,
+            questIndex: 0,
             points: 0,
             number: 0,
             email: 'fk@gmail.com',
@@ -75,6 +77,22 @@ class NpcView extends React.Component {
             });
     };
 
+    onGetQuest = () => {
+        axios.get('/api/quests', {
+                headers: {
+                    Accept: 'application/json',
+                },
+            })
+            .then((response) => {
+                const questData = response.data;
+                this.setState({ questData, popupQuest: true});
+                console.log(questData);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     handleAnswer = (correct, id) => {
         this.setState({ number: id});
         if (correct === this.state.number) {
@@ -104,11 +122,12 @@ class NpcView extends React.Component {
                 <Dialogue
                     trigger={this.state.popupQuest}
                     setTrigger={this.setTriggerForQuest}
+                    quest={this.state.questData}
                 >
                 Your Quests
                 </Dialogue>
                 <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
-                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTriggerForQuest(true)}>
+                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => {this.setTriggerForQuest(true); this.onGetQuest();}}>
                         <CardCover><img src={greenleaf} srcSet="" loading="lazy" alt=""/>
                         </CardCover>
                         <CardContent>

@@ -21,7 +21,7 @@ const Navbar = (props) => {
     elem.play();
   };
 
-  const Mute = () => {
+  const MuteSound = () => {
     if (muted === false) {
       document.querySelectorAll("video, audio").forEach((elem) => muteMe(elem));
       updateMuted(true);
@@ -73,13 +73,13 @@ const Navbar = (props) => {
           {muted == false && (
             <li>
               <FontAwesomeIcon className="icon" icon={faVolumeHigh} />
-              <a onClick={Mute}>Mute</a>
+              <a onClick={MuteSound}>Mute</a>
             </li>
           )}
           {muted == true && (
             <li>
               <FontAwesomeIcon className="icon" icon={faVolumeXmark} />
-              <a onClick={Mute}>Unmute</a>
+              <a onClick={MuteSound}>Unmute</a>
             </li>
           )}
         </ul>

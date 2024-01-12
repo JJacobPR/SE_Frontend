@@ -39,7 +39,7 @@ const RegisterView = (props) => {
             </label>
           </div>
           <button className="button">
-            Sign up <FontAwesomeIcon icon={faRightToBracket} />
+            Sign up <FontAwesomeIcon className="icon" icon={faRightToBracket} />
           </button>
         </form>
       </div>

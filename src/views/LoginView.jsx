@@ -25,7 +25,7 @@ const LoginView = () => {
       </div>
       <div className="LoginMain">
         <h2>
-          We need our superhero! <FontAwesomeIcon icon={faRightToBracket} beat />
+          We need our superhero! <FontAwesomeIcon className="icon" icon={faRightToBracket} beat />
         </h2>
         <form onSubmit={loginHandler}>
           <div className="LoginMail">
@@ -42,18 +42,18 @@ const LoginView = () => {
             </label>
           </div>
           <button className="button1">
-            Sign in <FontAwesomeIcon icon={faRightToBracket} />
+            Sign in <FontAwesomeIcon className="icon" icon={faRightToBracket} />
           </button>
         </form>
 
         <div className="ForgotPassHref">
           <a href="/">
-            Forgot Password? <FontAwesomeIcon icon={faEnvelope} />
+            Forgot Password? <FontAwesomeIcon className="icon" icon={faEnvelope} />
           </a>
         </div>
         <div className="RegisterHref">
           <a href="/register">
-            Sign up <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            Sign up <FontAwesomeIcon className="icon" icon={faArrowUpRightFromSquare} />
           </a>
         </div>
       </div>

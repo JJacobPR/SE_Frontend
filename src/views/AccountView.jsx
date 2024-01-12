@@ -20,11 +20,11 @@ const AccountView = (props) => {
   const [passwordConfirmation, updatePasswordConfirmation] = useState("");
   const [disabled, updateDisabled] = useState(true);
 
-  // useEffect(() => {
-  //   if (!LocalStorage.IsUserLogged()) {
-  //     RedirectionHelper.Redirect("/login");
-  //   }
-  // });
+  useEffect(() => {
+    if (!LocalStorage.IsUserLogged()) {
+      RedirectionHelper.Redirect("/login");
+    }
+  });
 
   return (
     <div className="AccountSite">
@@ -63,13 +63,13 @@ const AccountView = (props) => {
         </form>
 
         <button className="EditBtn">
-          Edit <FontAwesomeIcon icon={faPenToSquare} />
+          Edit <FontAwesomeIcon className="icon" icon={faPenToSquare} />
         </button>
         <button className="SaveBtn">
-          Save <FontAwesomeIcon icon={faFloppyDisk} disabled={disabled} />
+          Save <FontAwesomeIcon className="icon" icon={faFloppyDisk} disabled={disabled} />
         </button>
         <button className="DeleteBtn">
-          Delete account <FontAwesomeIcon icon={faTrash} />
+          Delete account <FontAwesomeIcon className="icon" icon={faTrash} />
         </button>
       </div>
     </div>

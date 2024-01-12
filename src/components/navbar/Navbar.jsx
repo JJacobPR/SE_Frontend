@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import LocalStorage from "../../helpers/LocalStorage";
@@ -20,7 +21,7 @@ const Navbar = (props) => {
     elem.play();
   };
 
-  const Mute = () => {
+  const MuteSound = () => {
     if (muted === false) {
       document.querySelectorAll("video, audio").forEach((elem) => muteMe(elem));
       updateMuted(true);
@@ -34,8 +35,6 @@ const Navbar = (props) => {
     LocalStorage.LogoutUser();
   };
 
-  const loginHandler = () => {};
-
   return (
     <nav>
       <Link className={styles["logo-wrapper"]} to="hub">
@@ -44,18 +43,22 @@ const Navbar = (props) => {
       <div>
         <ul className={styles["nav-main"]}>
           <li>
-            <FontAwesomeIcon icon={faComments} />
+          <FontAwesomeIcon className="icon" icon={faGamepad} />
+          <Link to="hub">Play</Link>
+          </li>
+          <li>
+            <FontAwesomeIcon className="icon" icon={faComments} />
             <Link to="profile">Forum</Link>
           </li>
 
           <li>
-            <FontAwesomeIcon icon={faUserCircle} />
+            <FontAwesomeIcon className="icon" icon={faUserCircle} />
             <Link to="account">My Account</Link>
           </li>
           {LocalStorage.IsUserLogged() == false && (
             <li>
-              <FontAwesomeIcon icon={faRightToBracket} />
-              <Link to="login" onClick={loginHandler}>
+              <FontAwesomeIcon className="icon" icon={faRightToBracket} />
+              <Link to="login" >
                 Login
               </Link>
             </li>
@@ -69,14 +72,14 @@ const Navbar = (props) => {
           )}
           {muted == false && (
             <li>
-              <FontAwesomeIcon icon={faVolumeHigh} />
-              <a onClick={Mute}>Mute</a>
+              <FontAwesomeIcon className="icon" icon={faVolumeHigh} />
+              <a onClick={MuteSound}>Mute</a>
             </li>
           )}
           {muted == true && (
             <li>
-              <FontAwesomeIcon icon={faVolumeXmark} />
-              <a onClick={Mute}>Unmute</a>
+              <FontAwesomeIcon className="icon" icon={faVolumeXmark} />
+              <a onClick={MuteSound}>Unmute</a>
             </li>
           )}
         </ul>

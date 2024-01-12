@@ -4,11 +4,11 @@ import LocalStorage from "../helpers/LocalStorage";
 import LeftSidebar from "../components/left_sidebar/LeftSidebar";
 
 const HubView = (props) => {
-  // useEffect(() => {
-  //   if (!LocalStorage.IsUserLogged()) {
-  //     RedirectionHelper.Redirect("/login");
-  //   }
-  // });
+  useEffect(() => {
+    if (!LocalStorage.IsUserLogged()) {
+      RedirectionHelper.Redirect("/login");
+    }
+  });
 
   return (
     <div style={{ display: "flex" }}>

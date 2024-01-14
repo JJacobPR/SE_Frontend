@@ -1,0 +1,111 @@
+.sidebar {
+  width: 400px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #084408;
+  border-top: none;
+  overflow: hidden;
+  // height: calc(100vh - 70px);
+  height: 100vh;
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+
+  .friendlist {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    h2 {
+      padding: 10px;
+      border: 3px solid #0b5a0b;
+      border-radius: 3px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+
+  div > h2 {
+    color: #084408;
+
+    font-size: 1.3rem;
+  }
+
+  div > h3 {
+    color: #0b5a0b;
+
+    margin-bottom: 2px;
+    font-size: 1rem;
+  }
+
+  ul {
+    align-items: center;
+    list-style: none;
+    padding-top: 2px;
+    margin: 0;
+
+    li {
+      display: flex;
+      margin-bottom: 10px;
+      background-color: rgb(182, 228, 182);
+      border-radius: 3px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        background-color: rgb(173, 235, 173);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      div {
+        flex-grow: 1;
+      }
+
+      .friend {
+        flex-direction: "row";
+        overflow: hidden;
+        justify-content: center;
+        align-items: center;
+
+        a {
+          margin-top: 5px;
+          text-align: center;
+          text-decoration: none;
+          font-weight: bold;
+          display: block;
+          transition: color 0.2s;
+
+          &:hover {
+            color: rgb(23, 57, 21);
+          }
+        }
+      }
+
+      .details {
+        flex-direction: "column";
+        overflow: hidden;
+      }
+
+      .startChatLink {
+        align-self: center;
+        padding: 5px 10px;
+        background-color: #084408;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: rgb(72, 151, 69);
+        }
+      }
+    }
+  }
+}

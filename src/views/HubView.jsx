@@ -1,25 +1,24 @@
 import RedirectionHelper from "../helpers/RedirectionHelper";
-import React, { useState } from 'react';
+import React, { useEffect } from "react";
+import LocalStorage from "../helpers/LocalStorage";
+import LeftSidebar from "../components/left_sidebar/LeftSidebar";
 
-class HubView extends React.Component {
+const HubView = (props) => {
+  useEffect(() => {
+    if (!LocalStorage.IsUserLogged()) {
+      RedirectionHelper.Redirect("/login");
+    }
+  });
 
-
-componentDidMount() {
-    if (1 !== 0) {
-      RedirectionHelper.Redirect('/login');
-        }
-        else {
-            //load hub
-        }
-  }
-
-  render() {
-    return (
-      <div>
+  return (
+    <div style={{ display: "flex" }}>
+      <LeftSidebar />
+      <div style={{ flex: 1 }}>
         <p>Hub</p>
+        {/* Rest of the hub content */}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default HubView;

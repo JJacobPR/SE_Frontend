@@ -9,9 +9,8 @@ import LoginView from "./views/LoginView.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.scss";
 import RegisterView from "./views/RegisterView.jsx";
-
+import ForumView from "./views/ForumView.jsx";
 import axios from "axios";
-import ProfileView from "./views/ProfileView.jsx";
 
 axios.defaults.baseURL = " https://se-test-server.it-core.fun/";
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
@@ -41,8 +40,8 @@ const router = createBrowserRouter([
         element: <HubView />,
       },
       {
-        path: "profile",
-        element: <ProfileView />,
+        path: "forum",
+        element: <ForumView />,
       },
       {
         path: "account",

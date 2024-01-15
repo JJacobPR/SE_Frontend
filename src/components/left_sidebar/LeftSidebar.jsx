@@ -3,88 +3,62 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./LeftSidebar.module.scss";
 import ProfilePreview from "./profile_preview/ProfilePreview";
+import ApiHelper from '../../helpers/ApiHelper';
+import Chat from '../chat/Chat';
 
 function LeftSidebar() {
-  // const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [activeFriendUuid, setActiveFriendUuid] = useState(null);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/user?withFriends=true", { withCredentials: true })
-  //     .then((response) => {
-  //       setUserData(response.data.data);
-  //       // console.log('User data:', response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching user data:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await ApiHelper.fetchLoggedUserWithFriends();
+        setUserData(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
 
-  const userData = {
-    uuid: "db233b11-f7a7-412b-a660-6450e5d26c1d",
-    name: "Player 1",
-    avatar: null,
-    about: null,
-    email: "test2@gmail.com",
-    level: 1,
-    experience: 20,
-    anonymous: false,
-    friendCode: "132DCA",
-    friends: [
-      {
-        uuid: "bfc273e2-e26c-4b05-8773-9e44d03f1ec8",
-        name: "coolname123",
-        avatar: null,
-        level: 7,
-        experience: 0,
-        favourite: false,
-      },
-      {
-        uuid: "bfc273e2-e26c-4b05-8773-9e44d03f1em0",
-        name: "alberteinsten928",
-        avatar: null,
-        level: 12,
-        experience: 0,
-        favourite: true,
-      },
-      {
-        uuid: "bfc273e2-e26c-4b05-8773-9e44d03f1e3d",
-        name: "vincentvangogh29",
-        avatar: null,
-        level: 3,
-        experience: 0,
-        favourite: false,
-      },
-    ],
-    created_at: "2023-11-25T16:20:52.000000Z",
-    updated_at: "2023-11-25T16:20:52.000000Z",
+    fetchData();
+  }, []);
+
+  const sortedFriends = userData && userData.friends
+    ? [...userData.friends].sort((a, b) => b.favourite - a.favourite)
+    : [];
+
+  const startChat = (uuid) => {
+    console.log(`Starting chat with UUID: ${uuid}`);
+    setActiveFriendUuid(uuid);
+    setIsChatOpen(true);
   };
-
-  const sortedFriends = userData && userData.friends ? [...userData.friends].sort((a, b) => b.favourite - a.favourite) : [];
 
   return (
     <div className={styles.sidebar}>
       <ul>
         <div>
-          <ProfilePreview userData={userData} />
+          <div className={styles.profile}>
+            <ProfilePreview userData={userData} />
+          </div>
           <div className={styles.friendlist}>
             <h2>Friends</h2>
             <ul>
-              {sortedFriends.map((friend) => (
+              {sortedFriends.map(friend => (
                 <li key={friend.uuid}>
                   <div className={styles.friend}>
                     <div className={styles.details}>
-                      <b>
-                        {friend.favourite && <span>☆ </span>}
-                        {friend.name}
-                      </b>
+                      <b>{friend.favourite && <span>☆ </span>}{friend.name}</b>
                       <br />
                       Level: {friend.level}
                       <br />
                     </div>
-                    {/* Link to the chat route, passing the friend's uuid as a parameter */}
-                    <Link to={`/chat/${friend.uuid}`} className={styles.startChatLink}>
+                    <button
+                      className={styles.startChat}
+                      onClick={() => startChat(friend.uuid)}
+                    >
                       Start Chat
-                    </Link>
+                    </button>
                   </div>
                 </li>
               ))}
@@ -92,6 +66,13 @@ function LeftSidebar() {
           </div>
         </div>
       </ul>
+      {isChatOpen &&
+        <Chat
+          friendUuid={activeFriendUuid}
+          isChatOpen={isChatOpen}
+          onClose={() => setIsChatOpen(false)}
+        />
+      }
     </div>
   );
 }

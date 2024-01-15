@@ -1,27 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "../styles/LoginView.scss";
 import "../index.scss";
 import superhero from "../assets/img/eco-man.svg";
+import LocalStorage from '../helpers/LocalStorage';
+import RedirectionHelper from '../helpers/RedirectionHelper';
+import ApiHelper from '../helpers/ApiHelper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faRightToBracket, faArrowUpRightFromSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const LoginView = () => {
-  const [email, updateEmail] = useState("");
-  const [password, updatePassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [csrfToken, setCsrfToken] = useState(null);
   const navigate = useNavigate();
 
-  const loginHandler = (event) => {
-    event.preventDefault();
-    if (email === "test@test.gmail" && password === "test") navigate("/hub");
-  };
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const csrfToken = await ApiHelper.fetchCsrfToken();
+        setCsrfToken(csrfToken);
+      } catch (error) {
+        console.error('Error retrieving CSRF token:', error);
+      }
+    };
 
+    fetchCsrfToken();
+  }, []);
+  const loginHandler = async (event) => {
+    event.preventDefault();
+
+    if (!email || !password) {
+      console.error("Please enter both email and password");
+      return;
+    }
+    try {
+      await axios.post('/api/login', {
+        email: email,
+        password: password,
+      }, {
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'X-XSRF-TOKEN': csrfToken,
+        }
+      });
+
+      console.log('Login successful');
+      const userDetails = await ApiHelper.fetchLoggedUser();
+      LocalStorage.SetActiveUser(userDetails.uuid);
+      navigate("/hub");
+    } catch (error) {
+      console.error('Error during login or fetching user data:', error);
+    }
+  };
+  if (LocalStorage.IsUserLogged()) {
+    RedirectionHelper.Redirect("hub");
+  }
   return (
     <div className="LoginSite">
       <div>
-        <img className="superHero" src={superhero} />
+        <img className="superHero" src={superhero} alt="Superhero" />
       </div>
       <div className="LoginMain">
         <h2>
@@ -31,14 +71,12 @@ const LoginView = () => {
           <div className="LoginMail">
             <label>
               Email
-              <input onChange={(e) => updateEmail(e.target.value)} type="text" name="mail" autoComplete="on" />
+              <input onChange={(e) => setEmail(e.target.value)} type="text" name="mail" autoComplete="on" value={email} />
             </label>
-          </div>
-
-          <div className="LoginPass">
+          </div>      <div className="LoginPass">
             <label>
               Password
-              <input onChange={(e) => updatePassword(e.target.value)} type="password" name="password" autoComplete="on" />
+              <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" autoComplete="on" value={password} />
             </label>
           </div>
           <button className="button1">
@@ -57,8 +95,7 @@ const LoginView = () => {
           </a>
         </div>
       </div>
-    </div>
-  );
+    </div>);
 };
 
 export default LoginView;

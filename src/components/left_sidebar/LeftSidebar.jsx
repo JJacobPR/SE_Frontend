@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import styles from "./LeftSidebar.module.scss";
 import ProfilePreview from "./profile_preview/ProfilePreview";
 import ApiHelper from '../../helpers/ApiHelper';
@@ -10,6 +8,9 @@ function LeftSidebar() {
   const [userData, setUserData] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [activeFriendUuid, setActiveFriendUuid] = useState(null);
+  const [potentialFriends, setPotentialFriends] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedUserUuid, setSelectedUserUuid] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +22,17 @@ function LeftSidebar() {
       }
     };
 
+    const getUsers = async () => {
+      try {
+        const allUsers = await ApiHelper.fetchUserWithoutFriends();
+        setPotentialFriends(allUsers);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
     fetchData();
+    getUsers();
   }, []);
 
   const sortedFriends = userData && userData.friends
@@ -34,6 +45,24 @@ function LeftSidebar() {
     setIsChatOpen(true);
   };
 
+  const selectUser = (uuid) => {
+    setSelectedUserUuid(uuid);
+  };
+
+  const confirmAddFriend = () => {
+    if (selectedUserUuid) {
+      ApiHelper.addFriend(selectedUserUuid);
+      setSelectedUserUuid(null);
+    }
+  };
+
+  const filteredUsers = searchTerm.length === 0
+    ? potentialFriends
+    : potentialFriends.filter(user =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
   return (
     <div className={styles.sidebar}>
       <ul>
@@ -43,6 +72,34 @@ function LeftSidebar() {
           </div>
           <div className={styles.friendlist}>
             <h2>Friends</h2>
+            <h3>Search Users</h3>
+            <div>
+              <input
+                type="text"
+                placeholder="Search users..."
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.searchInput}
+              />
+              {searchTerm && (
+                <ul className={styles.searchResults}>
+                  {filteredUsers.map(user => (
+                    <li
+                      key={user.uuid}
+                      onClick={() => selectUser(user.uuid)}
+                    >
+                      {user.name}
+                    </li>
+                  ))}
+                  {filteredUsers.length === 0 && <li>No users found</li>}
+                </ul>
+              )}
+
+              {selectedUserUuid && (
+                <button className={styles.addFriend} onClick={confirmAddFriend}>
+                  Add Friend
+                </button>
+              )}
+            </div>
             <ul>
               {sortedFriends.map(friend => (
                 <li key={friend.uuid}>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import LocalStorage from './LocalStorage';
 
 class ApiHelper {
 
@@ -53,6 +54,17 @@ class ApiHelper {
         }
     }
 
+    static fetchUserWithoutFriends = async () => {
+        try {
+            const response = await axios.get('/api/users?filter[search_not_friend]=j&paginate=false', { withCredentials: true });
+            console.log(response.data.data);
+            return response.data.data;
+        } catch (error) {
+            console.error('Error fetching users data:', error);
+            throw error;
+        }
+    }
+
     static fetchLoggedUserWithFriends = async () => {
         try {
             const response = await axios.get('/api/user?withFriends=true', { withCredentials: true });
@@ -79,6 +91,21 @@ class ApiHelper {
             return response.data.data;
         } catch (error) {
             console.error('Error fetching user data:', error);
+            throw error;
+        }
+    }
+
+    static addFriend = async (friend_uuid) => {
+        try {
+            const uuid = LocalStorage.GetActiveUser();
+            const response = await axios.post(`/api/users/${uuid}/addFriend`, {
+                friend_uuid: friend_uuid
+            }, {
+                withCredentials: true
+            });
+            return response.data.data;
+        } catch (error) {
+            console.error('Error adding friend:', error);
             throw error;
         }
     }

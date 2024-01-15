@@ -29,6 +29,24 @@
       text-align: center;
       margin-bottom: 10px;
     }
+
+    
+    .addFriend {
+      width: 100%;
+      align-self: center;
+      padding: 5px 10px;
+      background-color: #084408;
+      color: white;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      &:hover {
+        background-color: rgb(72, 151, 69);
+      }
+    }
   }
 
   div>h2 {
@@ -49,6 +67,7 @@
     list-style: none;
     padding-top: 2px;
     margin: 0;
+    margin-top: 4px;
 
     li {
       display: flex;

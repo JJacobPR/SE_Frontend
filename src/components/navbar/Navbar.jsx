@@ -48,7 +48,7 @@ const Navbar = (props) => {
           </li>
           <li>
             <FontAwesomeIcon className="icon" icon={faComments} />
-            <Link to="profile">Forum</Link>
+            <Link to="forum">Forum</Link>
           </li>
 
           <li>

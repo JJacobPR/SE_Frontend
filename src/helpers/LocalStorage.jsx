@@ -31,6 +31,17 @@ class LocalStorage {
         localStorage.removeItem("authValidUntil");
     }
 
+    static SetChatHistory(friendUuid, messages) {
+        const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || {};
+        chatHistory[friendUuid] = messages;
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+      }
+    
+      static GetChatHistory(friendUuid) {
+        const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || {};
+        return chatHistory[friendUuid] || [];
+      }
+
 }
 
 export default LocalStorage;

@@ -56,7 +56,7 @@ class ApiHelper {
 
     static fetchUserWithoutFriends = async () => {
         try {
-            const response = await axios.get('/api/users?filter[search_not_friend]=j&paginate=false', { withCredentials: true });
+            const response = await axios.get('/api/users?filter[not_friend]=true&paginate=false', { withCredentials: true });
             console.log(response.data.data);
             return response.data.data;
         } catch (error) {

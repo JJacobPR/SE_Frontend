@@ -30,7 +30,7 @@
       margin-bottom: 10px;
     }
 
-    
+
     .addFriend {
       width: 100%;
       align-self: center;
@@ -85,27 +85,33 @@
       }
 
       .friend {
-
         display: flex;
         width: 100%;
         flex-direction: column;
-        flex-grow: 1;
         align-items: flex-start;
 
-        .startChat {
+        .buttons {
+          display: flex;
+          flex-direction: row;
           width: 100%;
-          align-self: center;
-          padding: 5px 10px;
-          background-color: #084408;
-          color: white;
-          text-decoration: none;
-          border-radius: 3px;
-          transition: background-color 0.3s;
-          margin-top: 5px;
-          margin-bottom: 5px;
+          padding-top: 10px;
+          gap: 10px;
 
-          &:hover {
-            background-color: rgb(72, 151, 69);
+          .startChat,
+          .removeFriend {
+            flex-grow: 1;
+            padding: 5px 10px;
+            background-color: #084408;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+              background-color: rgb(72, 151, 69);
+            }
           }
         }
 

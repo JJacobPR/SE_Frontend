@@ -109,6 +109,25 @@ class ApiHelper {
             throw error;
         }
     }
+
+    static removeFriend = async (friend_uuid) => {
+        try {
+            const uuid = LocalStorage.GetActiveUser();
+            const csrfToken = await this.fetchCsrfToken();
+            const response = await axios.delete(`/api/users/${uuid}/removeFriend`, {
+                data: { friend_uuid: friend_uuid },
+                withCredentials: true,
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            });
+            console.log(`Friend with UUID: ${friend_uuid} removed successfully.`);
+            return response.data;
+        } catch (error) {
+            console.error('Error removing friend:', error);
+            throw error;
+        }
+    }
 }
 
 export default ApiHelper;

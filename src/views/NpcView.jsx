@@ -22,8 +22,10 @@ class NpcView extends React.Component {
         this.state = {
             popupQuiz: false,
             popupQuest: false,
+            popupTutorial: false,
             quizData: null,
             questData: null,
+            tutorialData: null,
             quizIndex: 0,
             questIndex: 0,
             points: 0,
@@ -61,6 +63,10 @@ class NpcView extends React.Component {
         this.setState({ popupQuest: value });
     };
 
+    setTriggerForTutorial = (value) => {
+        this.setState({ popupTutorial: value });
+    };
+
     onGetQuiz = () => {
         axios.get('/api/quizzes/getRandom', {
                 headers: {
@@ -87,6 +93,22 @@ class NpcView extends React.Component {
                 const questData = response.data;
                 this.setState({ questData, popupQuest: true});
                 console.log(questData);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    onGetTutorial = () => {
+        axios.get(`/api/tutorials?filter[user_uuid]=${LocalStorage.GetActiveUser()}`, {
+                headers: {
+                    Accept: 'application/json',
+                },
+            })
+            .then((response) => {
+                const tutorialData = response.data.data;
+                this.setState({ tutorialData, popupTutorial: true });
+                console.log(tutorialData);
             })
             .catch((error) => {
                 console.error(error);
@@ -124,8 +146,12 @@ class NpcView extends React.Component {
                     setTrigger={this.setTriggerForQuest}
                     quest={this.state.questData}
                 >
-                Your Quests
                 </Dialogue>
+                <Dialogue
+                    trigger={this.state.popupTutorial}
+                    setTrigger={this.setTriggerForTutorial}
+                    tutorial={this.state.tutorialData}
+                    />
                 <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
                     <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => {this.setTriggerForQuest(true); this.onGetQuest();}}>
                         <CardCover><img src={greenleaf} srcSet="" loading="lazy" alt=""/>
@@ -141,7 +167,7 @@ class NpcView extends React.Component {
                         <Typography level="body-lg" fontWeight="bold" textColor="black" mt={{ xs: 12, sm: 18 }}>Red Bird</Typography>
                         </CardContent>
                     </Card>
-                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => this.setTrigger(true)}>
+                    <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => {this.setTriggerForTutorial(true); this.onGetTutorial();}}>
                         <CardCover><img src={splashspeed} srcSet="" loading="lazy" alt=""/>
                         </CardCover>
                         <CardContent>

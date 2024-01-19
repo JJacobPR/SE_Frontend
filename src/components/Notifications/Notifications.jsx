@@ -85,7 +85,7 @@ function Notifications(props) {
 	  
 		const intervalId = setInterval(() => {
 			fetchData();
-		}, 5000);
+		}, 8000);
 	  
 		return () => clearInterval(intervalId);
 	  }, []);

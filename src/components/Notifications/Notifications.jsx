@@ -80,15 +80,15 @@ function Notifications(props) {
 		setNotifications(fetchedNotifications);
 	  };
 
-	useEffect(() => {
-		fetchData();
+	// useEffect(() => {
+	// 	fetchData();
 	  
-		const intervalId = setInterval(() => {
-			fetchData();
-		}, 8000);
+	// 	const intervalId = setInterval(() => {
+	// 		fetchData();
+	// 	}, 8000);
 	  
-		return () => clearInterval(intervalId);
-	  }, []);
+	// 	return () => clearInterval(intervalId);
+	//   }, []);
 
 	const clearAllNotifications = () => {
 		if (notifications.length === 0) {
@@ -174,6 +174,9 @@ function Notifications(props) {
 				  )}
 				</List>
 			  </div>
+			  <button className={styles["all-clear-button"]} onClick={fetchData}>
+				Refresh
+				</button>
 			</>
 		  )}
 		</div>

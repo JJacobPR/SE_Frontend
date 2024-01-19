@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styles from "./Dialogue.module.scss";
+import axios from "axios";
 
 function Dialogue(props) {
   const {trigger, setTrigger, question, handleAnswer, quest, tutorial, tutorialOverride} = props;
@@ -62,8 +63,43 @@ function Dialogue(props) {
         break;
     }
 
-    return <div>{content}</div>
+    let header = `Tutorial for #${tutorialChoice}:`;
+    if (tutorialChoice == 8) {
+      header = 'Tutorial for the Green Game:'
+    }
+
+    return <div>
+      <h1>{header}</h1>
+      {content}
+      </div>
   };
+
+  const getDynamicClass = (index) => {
+    return tutorial[index].completed ? styles.doneButton : styles.button;
+  }
+
+  const handleClose = () => {
+    setTrigger(false);
+    setTutorialChoice(tutorialOverride);
+
+    console.log(tutorialChoice)
+    if (tutorialChoice !== undefined) {
+      let toSet = tutorialChoice === 8 ? 0 : tutorialChoice
+      
+      console.log(`Tutorial ${toSet} done!`)
+      console.log(`uuid: ${tutorial[toSet].uuid}`)
+
+      axios.put(`/api/tutorials/${tutorial[toSet].uuid}`, {
+        "completed": true
+      })
+        .then((response) => {
+            console.log(tutorialData);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+  }
 
   return (
     trigger && (
@@ -103,27 +139,26 @@ function Dialogue(props) {
               <h1>Which tutorial would you like to see?</h1>
               <table>
                 <tr>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(8); console.log('Aaaa 8')}}>Green Game</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(1);}}>Game #1</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(2);}}>Game #2</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(3);}}>Game #3</button></th>
+                  <th><button className={getDynamicClass(0)} onClick={() => setTutorialChoice(8)}>Green Game</button></th>
+                  <th><button className={getDynamicClass(1)} onClick={() => setTutorialChoice(1)}>Game #1</button></th>
+                  <th><button className={getDynamicClass(2)} onClick={() => setTutorialChoice(2)}>Game #2</button></th>
+                  <th><button className={getDynamicClass(3)} onClick={() => setTutorialChoice(3)}>Game #3</button></th>
                 </tr>
                 <tr>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(4);}}>Game #4</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(5);}}>Game #5</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(6);}}>Game #6</button></th>
-                  <th><button className={styles.button} onClick={() => {setTutorialChoice(7);}}>Game #7</button></th>
+                  <th><button className={getDynamicClass(4)} onClick={() => setTutorialChoice(4)}>Game #4</button></th>
+                  <th><button className={getDynamicClass(5)} onClick={() => setTutorialChoice(5)}>Game #5</button></th>
+                  <th><button className={getDynamicClass(6)} onClick={() => setTutorialChoice(6)}>Game #6</button></th>
+                  <th><button className={getDynamicClass(7)} onClick={() => setTutorialChoice(7)}>Game #7</button></th>
                 </tr>
               </table>
             </div>
           )}
           {(tutorial && tutorialChoice) && (
             <div>
-              <h1>Tutorial for {tutorialChoice}:</h1>
               {getTutorial()}
             </div>
           )}
-          <button className={styles.closebtn} onClick={() => {setTrigger(false); setTutorialChoice(tutorialOverride)}}>
+          <button className={styles.closebtn} onClick={handleClose}>
             close
           </button>
         </div>

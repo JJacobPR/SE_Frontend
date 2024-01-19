@@ -57,7 +57,7 @@ h1 {
   padding-bottom: 30px;
 }
 
-.question > table, .button {
+.question > table, .question .button {
   width: 100%;
   height: 100px;
 }
@@ -76,4 +76,8 @@ h1 {
 .quest > div {
   padding: 20px;
   font-size: 20px;
+}
+
+.doneButton {
+  background-color: gray;
 }

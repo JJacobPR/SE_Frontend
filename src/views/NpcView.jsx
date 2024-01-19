@@ -1,4 +1,3 @@
-import { Dialog, SvgIcon } from '@mui/material';
 import React, { useState } from 'react';
 import axios from 'axios';
 import LocalStorage from '../helpers/LocalStorage';
@@ -131,6 +130,21 @@ class NpcView extends React.Component {
         console.log(this.state.points);
     };
 
+    resetTutorials = () => {
+        for (let i = 0; i < this.state.tutorialData.length; i++) {
+            if (this.state.tutorialData[i].completed) {
+                axios.put(`/api/tutorials/${this.state.tutorialData[i].uuid}`, {
+                    "completed": false
+                })
+                .then((response) => {
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            }
+        }
+    }
+
     render() {
         return (
             <div>
@@ -151,7 +165,7 @@ class NpcView extends React.Component {
                     trigger={this.state.popupTutorial}
                     setTrigger={this.setTriggerForTutorial}
                     tutorial={this.state.tutorialData}
-                    />
+                />
                 <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
                     <Card component="li" sx={{ maxWidth: 200, maxHeight: 200, flexGrow: 1 }} onClick={() => {this.setTriggerForQuest(true); this.onGetQuest();}}>
                         <CardCover><img src={greenleaf} srcSet="" loading="lazy" alt=""/>
@@ -176,6 +190,7 @@ class NpcView extends React.Component {
                     </Card>
                 </Box>
                 <Notifications></Notifications>
+                <button onClick={this.resetTutorials}>Reset Tutorials</button>
             </div>
         );
     }

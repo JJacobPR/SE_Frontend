@@ -99,7 +99,7 @@ class NpcView extends React.Component {
     };
 
     onGetTutorial = () => {
-        axios.get(`/api/tutorials?filter[user_uuid]=${LocalStorage.GetActiveUser()}`, {
+        axios.get('/api/tutorials', {
                 headers: {
                     Accept: 'application/json',
                 },

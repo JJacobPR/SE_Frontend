@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/RegisterView.scss";
 import "../index.scss";
 import superhero from "../assets/img/eco-man.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import LocalStorage from '../helpers/LocalStorage';
-import RedirectionHelper from '../helpers/RedirectionHelper';
 import { useNavigate } from "react-router-dom";
+import ApiHelper from "../helpers/ApiHelper.jsx";
+import axios from 'axios';
 
 
 

@@ -52,6 +52,10 @@ const Navbar = (props) => {
           </li>
 
           <li>
+          <Link to="npc">NPC</Link>
+          </li>
+
+          <li>
             <FontAwesomeIcon className="icon" icon={faUserCircle} />
             <Link to="account">My Account</Link>
           </li>

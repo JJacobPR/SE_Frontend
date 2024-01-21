@@ -1,90 +1,99 @@
 .RegisterSite {
-    background-image: url("../assets/img/background.jpg");
-    height:100vb;
-    width: 100%;
-    margin: auto auto;
-    background-position: right center;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  background-image: url("../assets/img/background.jpg");
+  height: 100vb;
+  width: 100%;
+  margin: auto auto;
+  background-position: right center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .RegisterMain {
-    background-color: #ffffff;
-    border-radius: 25px;
-    border: 4px solid #084408;
-    padding: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: -400px;
-    max-width: 420px;
-    padding: 20px;
-    text-align: center;
-  }
+  background-color: #ffffff;
+  border-radius: 25px;
+  border: 4px solid #084408;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  transform: translateY(40%);
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
 
-  .icon {
-    * {
-      color: white;
-    }
-  }
-  
-  .RegisterMain h2 {
-    color: #176a17;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .RegisterName, .RegisterMail, .RegisterPass, .RegisterConfirmationPass {
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  
-  .RegisterName label, .RegisterMail label, .RegisterPass label, .RegisterConfirmationPass label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 370px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .button {
-    background-color: #176a17; /* Green */
-    border-radius: 25px;
-    border: 1px solid #176a17;
+.icon {
+  * {
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
-    font-size: 16px;
-    transition: background-color 0.3s;
   }
-  
-  .ReturnHomeButton {
-    margin-top: 20px;
-  }
-  
-  .ReturnHomeButton a {
-    background-color: #084408; /* Green */
-    border-radius: 25px;
-    border: 1px solid #084408;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    width: fit-content;
-    display: block;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .ReturnHomeButton a:hover, .button:hover {
-    background-color: rgb(72, 151, 69);
-  }
+}
+
+.RegisterMain h2 {
+  color: #176a17;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.RegisterName,
+.RegisterMail,
+.RegisterPass,
+.RegisterConfirmationPass {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.RegisterName label,
+.RegisterMail label,
+.RegisterPass label,
+.RegisterConfirmationPass label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 370px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.button {
+  background-color: #176a17; /* Green */
+  border-radius: 25px;
+  border: 1px solid #176a17;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.ReturnHomeButton {
+  margin-top: 20px;
+}
+
+.ReturnHomeButton a {
+  background-color: #084408; /* Green */
+  border-radius: 25px;
+  border: 1px solid #084408;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: fit-content;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.ReturnHomeButton a:hover,
+.button:hover {
+  background-color: rgb(72, 151, 69);
+}

@@ -1,3 +1,16 @@
+.postModalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1010;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .postmodal {
     background-color: #fff;
     padding: 20px;
@@ -8,9 +21,153 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1010;
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 800px;
+    min-height: 40vh;
     overflow-y: auto;
     max-height: 90vh;
-  
+}
+
+.closeButton {
+    background-color: #084408;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(72, 151, 69);
+    }
+}
+
+.postUserInfo {
+    background-color: #f3f3f3;
+    border-radius: 3px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    img {
+        max-width: 25%;
+        max-height: 25%;
+        border-radius: 50%;
+        padding: 10px;
+    }
+
+    p {
+        color: #084408;
+        margin: 5px 0;
+    }
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #084408;
+    margin-bottom: 5px;
+}
+
+.postComments {
+    background-color: #f3f3f3;
+    border-radius: 3px;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h3 {
+        color: #084408;
+    }
+
+    .comment {
+        margin-top: 5px;
+        padding: 5px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+        p {
+            color: #084408;
+        }
+    }
+}
+
+.commentForm {
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 15px;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 60px;
+    }
+
+    button {
+        background-color: #176a17;
+        border-radius: 25px;
+        border: 1px solid #176a17;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(72, 151, 69);
+        }
+    }
+
+    .submitButton {
+        background-color: #0d4c0d;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+
+        &:hover {
+            background-color: rgb(72, 151, 69);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(23, 106, 23, 0.5);
+        }
+    }
 }

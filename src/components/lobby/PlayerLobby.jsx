@@ -1,4 +1,3 @@
-import ServerConnection from "./ServerConnection";
 class PlayerLobby {
   constructor(gameId, lobbyId, serverConnection) {
     this.gameId = gameId;

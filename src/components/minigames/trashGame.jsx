@@ -119,11 +119,15 @@ class TrashGame extends Phaser.Scene {
     increaseScore() {
         this.score += 1;
         this.scoreText.setText(`Score: ${this.score}`);
+        // if(this.score>2){
+        //     this.switchToLobby(false)
+        // }
     }
 
     decreaseScore() {
         this.score -= 1;
         this.scoreText.setText(`Score: ${this.score}`);
+
         // this.score = Math.max(0, this.score - 1);
         // this.scoreText.setText(`Score: ${this.score}`);
     }

@@ -5,11 +5,11 @@ import LeftSidebar from "../components/left_sidebar/LeftSidebar";
 import ApiHelper from "../helpers/ApiHelper.jsx";
 import {useNavigate} from "react-router-dom";
 import Hub from "../components/lobby/Hub.jsx";
-import ServerConnection from "../components/lobby/ServerConnection.jsx";
 import MinigameComponent from "../components/minigames/MinigameComponent.jsx";
 
 const HubView = (props) => {
     const [gameRunning, setGameRunning] = useState(false);
+    const [gameScore, setGameScore] = useState(0)
     const navigate = useNavigate();
     const initialLobbyValue = [{
         uuid: "",
@@ -95,29 +95,50 @@ const HubView = (props) => {
         setPlayers(initialPlayerValue);
         setLobby(initialLobbyValue);
         console.log("Game deleted");
+        setGameRunning(false)
+
+
     }
 
     return (
         <div style={{display: "flex"}}>
             <LeftSidebar/>
             <div style={{flex: 1}}>
-                <GameRunning></GameRunning>
+                <GameComponent></GameComponent>
             </div>
         </div>
     );
 
-    function GameRunning() {
-        if (gameRunning) {
-            return <MinigameComponent gameNumber={1}></MinigameComponent>
-        } else {
-            return <>
-                <button onClick={handleCreateLobby}>Create Lobby Game 1</button>
-                <button onClick={handleAddPlayer}>Add Player 1</button>
-                <button onClick={handleAddPlayer1}>Add Player 2</button>
-                <button onClick={startGame}>Start Game</button>
-                <button onClick={deleteGame}>Delete Game</button>
-            </>
+
+    // pass number to change score of the game or pass false to stop game from running
+    function changeGameState(value) {
+        setGameRunning(false)
+
+    }
+
+    function GameComponent() {
+        if(gameRunning===false){
+                return <>
+                    <button onClick={handleCreateLobby}>Create Lobby Game 1</button>
+                    <button onClick={handleAddPlayer}>Add Player 1</button>
+                    <button onClick={handleAddPlayer1}>Add Player 2</button>
+                    <button onClick={startGame}>Start Game</button>
+                    <button onClick={deleteGame}>Delete Game</button>
+                </>
         }
+        // if (gameScore > 3 ) {
+        //     return <>
+        //         <div>
+        //             <h1>You have finished the game with score {gameScore}</h1>
+        //         </div>
+        //     </> }
+        // else if (gameRunning === false) {
+
+        // } else {
+        return <MinigameComponent gameNumber={1} switchToLobby={changeGameState}></MinigameComponent>
+
+        //
+
     }
 
 };

@@ -109,6 +109,87 @@ class ApiHelper {
             throw error;
         }
     }
+
+    static createGame = async (player_limit, level) => {
+        try {
+            const response = await axios.post('/api/games', {
+                limit: player_limit,
+                level: level,
+            }, {
+                withCredentials: true
+            });
+            return response.data.data;
+        } catch (error) {
+            console.error('Error creating lobby:', error);
+            throw error;
+        }
+    }
+
+    static addUserToLobby = async (gameUUID, joiner_uuid) => {
+        try {
+            const response = await axios.put(`/api/games/${gameUUID}`, {
+                joiner_uuid: joiner_uuid,
+            }, {
+                withCredentials: true
+            });
+            return response.data.data;
+        } catch (error) {
+            console.error('Error when adding player to lobby:', error);
+            throw error;
+        }
+    }
+
+    static fetchUserByUUID = async (userUUID) => {
+        try {
+            const response = await axios.get(`/api/users/${userUUID}`, {
+                withCredentials: true
+            });
+            return response.data.data;
+        } catch (error) {
+            console.error(`Error when fetching ${userUUID} user data:`, error);
+            throw error;
+        }
+    }
+
+    static updateLobbyStage = async (gameUUID, stage) => {
+        try {
+            const response = await axios.put(`/api/games/${gameUUID}`, {
+                stage: stage,
+            }, {
+                withCredentials: true
+            });
+            return response;
+        } catch (error) {
+            console.error('Error when updating lobby stage:', error);
+            throw error;
+        }
+    }
+
+    static updateLobbyPoints = async (gameUUID, points) => {
+        try {
+            const response = await axios.put(`/api/games/${gameUUID}`, {
+                points: points,
+            }, {
+                withCredentials: true
+            });
+            return response;
+        } catch (error) {
+            console.error('Error when updating lobby points:', error);
+            throw error;
+        }
+    }
+
+    static destroyGame = async (gameUUID) => {
+        try {
+            const response = await axios.delete(`/api/games/${gameUUID}`, {
+                withCredentials: true
+            });
+            return response;
+        } catch (error) {
+            console.error('Error when destroying game lobby:', error);
+            throw error;
+        }
+    }
 }
 
 export default ApiHelper;

@@ -1,18 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/RegisterView.scss";
 import "../index.scss";
 import superhero from "../assets/img/eco-man.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import LocalStorage from '../helpers/LocalStorage';
+import LocalStorage from "../helpers/LocalStorage";
 import { useNavigate } from "react-router-dom";
 import ApiHelper from "../helpers/ApiHelper.jsx";
-import axios from 'axios';
-
-
+import axios from "axios";
 
 const RegisterView = (props) => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,10 +23,10 @@ const RegisterView = (props) => {
         const csrfToken = await ApiHelper.fetchCsrfToken();
         setCsrfToken(csrfToken);
       } catch (error) {
-        console.error('Error retrieving CSRF token:', error);
+        console.error("Error retrieving CSRF token:", error);
       }
     };
-  
+
     fetchCsrfToken();
   }, []);
 
@@ -38,44 +35,46 @@ const RegisterView = (props) => {
     // Validate input here if necessary
 
     try {
-      const response = await axios.post('/api/register', {
+      const response = await axios.post("/api/register", {
         name: name,
         email: email,
         password: password,
-        password_confirmation: passwordConfirmation
+        password_confirmation: passwordConfirmation,
       });
 
       if (response.status === 204) {
         // Handle automatic login after registration
-        await axios.post('/api/login', {
-           email: email, 
-           password: password 
-          }, { 
-            withCredentials: true, 
+        await axios.post(
+          "/api/login",
+          {
+            email: email,
+            password: password,
+          },
+          {
+            withCredentials: true,
             headers: {
-              'Accept': 'application/json',
-              'X-XSRF-TOKEN': csrfToken,
-        } } );
+              Accept: "application/json",
+              "X-XSRF-TOKEN": csrfToken,
+            },
+          }
+        );
         // Redirect or perform other actions after successful login
-        console.log('Login successful');
+        console.log("Login successful");
         const userDetails = await ApiHelper.fetchLoggedUser();
         LocalStorage.SetActiveUser(userDetails.uuid);
         navigate("/hub");
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error("Registration error:", error);
     }
   };
 
-
   return (
     <div className="RegisterSite">
-      <div>
-        <img className="superHero" src={superhero} />
-      </div>
       <div className="RegisterMain">
+        <img className="superHero" src={superhero} />
         <h2>A superhero in the making</h2>
-        <form  onSubmit={handleRegister}>
+        <form onSubmit={handleRegister}>
           <div className="RegisterName">
             <label>
               Name

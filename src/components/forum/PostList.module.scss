@@ -1,32 +1,51 @@
 .postlist {
-    padding: 20px;
-    background-color: #fff;
-    border-left: 2px solid #084408;
-  
-    .postitem {
-      background-color: rgb(182, 228, 182);
+  padding: 20px;
+  background-color: #fff;
+  border-left: 2px solid #084408;
+
+  .postlistitem {
+    background-color: rgb(182, 228, 182);
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: rgb(173, 235, 173);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h3,
+    p {
+      color: #084408;
+    }
+  }
+
+  .createPostButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    button {
+      background-color: #084408;
+      color: white;
+      border: none;
+      padding: 10px 15px;
       border-radius: 3px;
-      padding: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 10px;
-      transition: background-color 0.3s, box-shadow 0.3s;
-  
+      transition: background-color 0.3s;
+
       &:hover {
-        background-color: rgb(173, 235, 173);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-  
-      h3, p {
-        color: #084408;
+        background-color: rgb(72, 151, 69);
       }
     }
   }
-  
+
   .paginationbuttons {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  
+
     button {
       background-color: #084408;
       color: white;
@@ -35,14 +54,19 @@
       margin: 0 5px;
       border-radius: 3px;
       transition: background-color 0.3s;
-  
+
       &:hover {
         background-color: rgb(72, 151, 69);
       }
-  
+
       &:disabled {
         background-color: grey;
         cursor: not-allowed;
       }
     }
   }
+}
+
+.blurred {
+  filter: blur(5px);
+}

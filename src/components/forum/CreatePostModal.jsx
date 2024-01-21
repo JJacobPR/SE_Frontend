@@ -15,8 +15,7 @@ const CreatePostModal = ({ onClose }) => {
     try {
       const response = await axios.post('/api/posts', {
         title,
-        description: content,
-        image: "notnull"
+        description: content
       }, {
         withCredentials: true,
         headers: {

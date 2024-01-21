@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 class TrashGame extends Phaser.Scene {
-    constructor(gameInstnace, switchToLobby) {
+    constructor(switchToLobby) {
         super({
             key: 'TrashGame',
         });
@@ -10,8 +10,10 @@ class TrashGame extends Phaser.Scene {
         this.score = 0;
         this.scoreText = null;
         this.cursors = null;
-        this.gameInstance = gameInstnace;
         this.switchToLobby = switchToLobby;
+        this.timeLimit = 180;
+        this.timerText = null;
+        this.updateTimer = this.updateTimer.bind(this);
     }
 
     preload() {
@@ -25,6 +27,14 @@ class TrashGame extends Phaser.Scene {
 
     create() {
         this.cameras.main.setBounds(0, 0, 1200, 600);
+
+        this.timeLimit = 180;
+        this.timer = setInterval(this.updateTimer, 1000);
+        this.timerText = this.add.text(this.cameras.main.width - 200, 16, `Time: ${this.timeLimit}`, {
+            fontSize: '32px',
+            fill: '#fff',
+            align: 'left'
+        });
 
         const basketColors = ['basket_blue', 'basket_green', 'basket_yellow'];
         const randomBasketColor = Phaser.Utils.Array.GetRandom(basketColors);
@@ -67,7 +77,6 @@ class TrashGame extends Phaser.Scene {
     collectTrash(basket, trash) {
         trash.destroy();
 
-        // Sprawdź kolor kosza i typ śmiecia
         const basketColor = this.basket.texture.key;
         const trashType = trash.trashType;
 
@@ -119,17 +128,26 @@ class TrashGame extends Phaser.Scene {
     increaseScore() {
         this.score += 1;
         this.scoreText.setText(`Score: ${this.score}`);
-        // if(this.score>2){
-        //     this.switchToLobby(false)
-        // }
+        if (this.score >= 30) {
+            this.switchToLobby(this.score);
+        }
     }
 
     decreaseScore() {
         this.score -= 1;
         this.scoreText.setText(`Score: ${this.score}`);
-
         // this.score = Math.max(0, this.score - 1);
         // this.scoreText.setText(`Score: ${this.score}`);
+    }
+
+    updateTimer() {
+        this.timeLimit--;
+    
+        if (this.timeLimit <= 0) {
+            this.switchToLobby(this.score);
+        }
+
+        this.timerText.setText(`Time: ${this.timeLimit}`);
     }
 }
 

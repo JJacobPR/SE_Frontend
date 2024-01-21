@@ -55,7 +55,7 @@ class TrashGame extends Phaser.Scene {
 
         this.spawnTrash();
         this.time.addEvent({
-            delay: 3000,
+            delay: 2000,
             callback: this.spawnTrash,
             callbackScope: this,
             loop: true,

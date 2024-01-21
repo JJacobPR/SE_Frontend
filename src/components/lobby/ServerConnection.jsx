@@ -38,7 +38,7 @@ class ServerConnection {
   };
 
   async getUser(userUUID) {
-    const response = await ApiHelper.fetchUser(this.csrfToken, userUUID)
+    const response = await ApiHelper.fetchUserByUUID(userUUID)
     let split = response.split('uuid:" "');
     const playerUUID = split[1].split('"');
     split = response.split('name:" "');

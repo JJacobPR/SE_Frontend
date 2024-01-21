@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Post from './Post';
+import CreatePostModal from './CreatePostModal';
 import ApiHelper from '../../helpers/ApiHelper';
-import styles from './PostList.module.scss'
+import styles from './PostList.module.scss';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
   useEffect(() => {
     const fetchAndSetPosts = async () => {
@@ -30,10 +32,15 @@ const PostList = () => {
       console.error('Error fetching full post:', error);
     }
   };
-  
+
+  const applyBlur = (selectedPost !== null || showCreatePostModal) ? styles.blurred : '';
 
   return (
     <div className={styles.postlist}>
+      <div className={applyBlur}>
+      <div className={styles.createPostButton}>
+        <button onClick={() => setShowCreatePostModal(true)}>Create New Post</button>
+      </div>
       {posts.map(post => (
         <div className={styles.postlistitem} key={post.uuid} onClick={() => handlePostClick(post.uuid)}>
           <h3>{post.title}</h3>
@@ -41,11 +48,19 @@ const PostList = () => {
           <p>Comments: {post.comments_count}</p>
         </div>
       ))}
-      <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+      
+      <div className={styles.paginationbuttons}>
+        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+        <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+      </div>
+      </div>
+
+      {showCreatePostModal && (
+        <CreatePostModal onClose={() => setShowCreatePostModal(false)} />
+      )}
 
       {selectedPost && (
-        <div className="post-modal-background">
+        <div>
           <Post post={selectedPost} onClose={() => setSelectedPost(null)} />
         </div>
       )}

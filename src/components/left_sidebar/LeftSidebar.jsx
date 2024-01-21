@@ -45,6 +45,19 @@ function LeftSidebar() {
     setIsChatOpen(true);
   };
 
+  const confirmRemoveFriend = (friendUuid) => {
+    const isConfirmed = window.confirm("Are you sure you want to remove this friend?");
+    if (isConfirmed) {
+      ApiHelper.removeFriend(friendUuid)
+        .then(() => {
+          console.log(`Friend with UUID: ${friendUuid} removed.`);
+        })
+        .catch(error => {
+          console.error('Error removing friend:', error);
+        });
+    }
+  };
+
   const selectUser = (uuid) => {
     setSelectedUserUuid(uuid);
   };
@@ -110,12 +123,22 @@ function LeftSidebar() {
                       Level: {friend.level}
                       <br />
                     </div>
+                    <div className={styles.buttons}>
+
+                    
                     <button
                       className={styles.startChat}
                       onClick={() => startChat(friend.uuid)}
                     >
                       Start Chat
                     </button>
+                    <button
+                      className={styles.removeFriend}
+                      onClick={() => confirmRemoveFriend(friend.uuid)}
+                    >
+                      🗑️
+                    </button>
+                    </div>
                   </div>
                 </li>
               ))}

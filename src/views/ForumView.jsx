@@ -6,9 +6,7 @@ class ForumView extends React.Component {
   render() {
     return (
       <div>
-        <button ></button>
         <PostList />
-
       </div>
     );
   }

@@ -1,0 +1,132 @@
+.createPostModalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1010;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createPostModal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+  width: 90%;
+  max-width: 800px;
+  min-height: 40vh;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+
+h2 {
+  color: #176a17;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+textarea {
+  resize: vertical;
+  height: 110px;
+}
+
+button {
+  background-color: #176a17;
+  border-radius: 25px;
+  border: 1px solid #176a17;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(72, 151, 69);
+  }
+}
+
+.submitButton {
+  background-color: #176a17;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px 0;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgb(72, 151, 69);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(23, 106, 23, 0.5);
+  }
+}
+
+
+.closeButton {
+  background-color: #084408;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+      background-color: rgb(72, 151, 69);
+  }
+}
+
+/* Apply the same text styling as the post component for consistency */
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #084408;
+  margin-bottom: 5px;
+}
+
+/* You can add additional styling as needed here */

@@ -8,6 +8,7 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import LocalStorage from "../../helpers/LocalStorage";
 
 const Navbar = (props) => {
@@ -43,8 +44,8 @@ const Navbar = (props) => {
       <div>
         <ul className={styles["nav-main"]}>
           <li>
-          <FontAwesomeIcon className="icon" icon={faGamepad} />
-          <Link to="hub">Play</Link>
+            <FontAwesomeIcon className="icon" icon={faGamepad} />
+            <Link to="hub">Play</Link>
           </li>
           <li>
             <FontAwesomeIcon className="icon" icon={faComments} />
@@ -52,7 +53,7 @@ const Navbar = (props) => {
           </li>
 
           <li>
-          <Link to="npc">NPC</Link>
+            <Link to="npc">NPC</Link>
           </li>
 
           <li>
@@ -62,13 +63,12 @@ const Navbar = (props) => {
           {LocalStorage.IsUserLogged() == false && (
             <li>
               <FontAwesomeIcon className="icon" icon={faRightToBracket} />
-              <Link to="login" >
-                Login
-              </Link>
+              <Link to="login">Login</Link>
             </li>
           )}
           {LocalStorage.IsUserLogged() == true && (
             <li>
+              <FontAwesomeIcon className="icon" icon={faRightFromBracket} />
               <Link to="login" onClick={onLogout}>
                 Logout
               </Link>

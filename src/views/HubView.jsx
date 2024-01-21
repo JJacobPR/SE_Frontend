@@ -6,8 +6,10 @@ import ApiHelper from "../helpers/ApiHelper.jsx";
 import {useNavigate} from "react-router-dom";
 import Hub from "../components/lobby/Hub.jsx";
 import ServerConnection from "../components/lobby/ServerConnection.jsx";
+import MinigameComponent from "../components/minigames/MinigameComponent.jsx";
 
 const HubView = (props) => {
+    const [gameRunning, setGameRunning] = useState(false);
     const navigate = useNavigate();
     const initialLobbyValue = [{
         uuid: "",
@@ -28,14 +30,14 @@ const HubView = (props) => {
     const [players, setPlayers] = useState([]);
     const hub = new Hub();
 
-  useEffect(() => {
-    if (!LocalStorage.IsUserLogged()) {
-      RedirectionHelper.Redirect("/login");
-    }
-  });
+    useEffect(() => {
+        if (!LocalStorage.IsUserLogged()) {
+            RedirectionHelper.Redirect("/login");
+        }
+    });
 
     const handleCreateLobby = async () => {
-        const result = await ApiHelper.createGame(4,1);
+        const result = await ApiHelper.createGame(4, 1);
         const result2 = await ApiHelper.fetchLoggedUser();
         console.log(result);
         console.log(result2);
@@ -45,13 +47,13 @@ const HubView = (props) => {
     }
 
     const handleAddPlayer = async (joinerUUID) => {
-        if(lobby.uuid != "" && players.length <= lobby.limit){
+        if (lobby.uuid != "" && players.length <= lobby.limit) {
             joinerUUID = "730fa869-f7b1-444b-8bca-ff11953f1c75";  //temp value
             const result = await ApiHelper.addUserToLobby(lobby.uuid, joinerUUID);
             const result2 = await ApiHelper.fetchUserByUUID(joinerUUID);
             console.log(result);
             console.log(result2);
-            setPlayers(players => [ ...players, {
+            setPlayers(players => [...players, {
                 uuid: result2.uuid,
                 name: result2.name,
                 email: result2.email,
@@ -62,7 +64,7 @@ const HubView = (props) => {
     }
 
     const handleAddPlayer1 = async (joinerUUID) => {
-        if(lobby.uuid != "" && players.length <= lobby.limit){
+        if (lobby.uuid != "" && players.length <= lobby.limit) {
             joinerUUID = "53584727-b5f6-455f-93e6-79c6b4f101ce"; //temp value
             const result = await ApiHelper.addUserToLobby(lobby.uuid, joinerUUID);
             const result2 = await ApiHelper.fetchUserByUUID(joinerUUID);
@@ -79,11 +81,12 @@ const HubView = (props) => {
     }
 
     const startGame = async () => {
-        if(lobby.uuid != ""){
+        if (lobby.uuid != "") {
             console.log(players);
             const result = await ApiHelper.updateLobbyStage(lobby.uuid, 2);
             console.log("Game started");
             //give player to games components
+            setGameRunning(true)
         }
     }
 
@@ -94,19 +97,29 @@ const HubView = (props) => {
         console.log("Game deleted");
     }
 
-  return (
-    <div style={{ display: "flex" }}>
-      <LeftSidebar />
-      <div style={{ flex: 1 }}>
-          <button onClick={handleCreateLobby}>Create Lobby Game 1</button>
-          <button onClick={handleAddPlayer}>Add Player 1</button>
-          <button onClick={handleAddPlayer1}>Add Player 2</button>
-          <button onClick={startGame}>Start Game</button>
-          <button onClick={deleteGame}>Delete Game</button>
-        {/* Rest of the hub content */}
-      </div>
-    </div>
-  );
+    return (
+        <div style={{display: "flex"}}>
+            <LeftSidebar/>
+            <div style={{flex: 1}}>
+                <GameRunning></GameRunning>
+            </div>
+        </div>
+    );
+
+    function GameRunning() {
+        if (gameRunning) {
+            return <MinigameComponent gameNumber={1}></MinigameComponent>
+        } else {
+            return <>
+                <button onClick={handleCreateLobby}>Create Lobby Game 1</button>
+                <button onClick={handleAddPlayer}>Add Player 1</button>
+                <button onClick={handleAddPlayer1}>Add Player 2</button>
+                <button onClick={startGame}>Start Game</button>
+                <button onClick={deleteGame}>Delete Game</button>
+            </>
+        }
+    }
+
 };
 
 export default HubView;

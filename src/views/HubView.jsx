@@ -132,6 +132,9 @@ const HubView = (props) => {
                     <button onClick={() => setSelectedGame(2)}> Select Game 2</button>
                     <button onClick={() => setSelectedGame(3)}> Select Game 3</button>
                     <button onClick={() => setSelectedGame(4)}> Select Game 4</button>
+                    <button onClick={() => setSelectedGame(5)}> Select Game 4</button>
+                    <button onClick={() => setSelectedGame(6)}> Select Game 4</button>
+                    <button onClick={() => setSelectedGame(7)}> Select Game 4</button>
                 </>
         }
         // if (gameScore > 3 ) {

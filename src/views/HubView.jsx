@@ -6,10 +6,12 @@ import ApiHelper from "../helpers/ApiHelper.jsx";
 import {useNavigate} from "react-router-dom";
 import Hub from "../components/lobby/Hub.jsx";
 import MinigameComponent from "../components/minigames/MinigameComponent.jsx";
+import {Button} from "@mui/material";
 
 const HubView = (props) => {
     const [gameRunning, setGameRunning] = useState(false);
     const [gameScore, setGameScore] = useState(0)
+    const [gameSelected, setSelectedGame] = useState(1)
     const navigate = useNavigate();
     const initialLobbyValue = [{
         uuid: "",
@@ -37,13 +39,13 @@ const HubView = (props) => {
     });
 
     const handleCreateLobby = async () => {
-        const result = await ApiHelper.createGame(4, 1);
-        const result2 = await ApiHelper.fetchLoggedUser();
-        console.log(result);
-        console.log(result2);
-        setLobby(await result);
-        setPlayers(players => [{uuid: result2.uuid, name: result2.name, email: result2.email, lobby_host: 1}]);
-        console.log("Game created");
+        // const result = await ApiHelper.createGame(4, 1);
+        // const result2 = await ApiHelper.fetchLoggedUser();
+        // console.log(result);
+        // console.log(result2);
+        // setLobby(await result);
+        // setPlayers(players => [{uuid: result2.uuid, name: result2.name, email: result2.email, lobby_host: 1}]);
+        // console.log("Game created");
     }
 
     const handleAddPlayer = async (joinerUUID) => {
@@ -81,13 +83,15 @@ const HubView = (props) => {
     }
 
     const startGame = async () => {
-        if (lobby.uuid != "") {
-            console.log(players);
-            const result = await ApiHelper.updateLobbyStage(lobby.uuid, 2);
-            console.log("Game started");
-            //give player to games components
-            setGameRunning(true)
-        }
+        setGameRunning(true)
+
+        // if (lobby.uuid != "") {
+        //     // console.log(players);
+        //     // const result = await ApiHelper.updateLobbyStage(lobby.uuid, 2);
+        //     // console.log("Game started");
+        //     //give player to games components
+        //     // setGameRunning(true)
+        // }
     }
 
     const deleteGame = async () => {
@@ -119,11 +123,15 @@ const HubView = (props) => {
     function GameComponent() {
         if(gameRunning===false){
                 return <>
-                    <button onClick={handleCreateLobby}>Create Lobby Game 1</button>
-                    <button onClick={handleAddPlayer}>Add Player 1</button>
-                    <button onClick={handleAddPlayer1}>Add Player 2</button>
+                    {/*<button onClick={handleCreateLobby}>Create Lobby Game 1</button>*/}
+                    {/*<button onClick={handleAddPlayer}>Add Player 1</button>*/}
+                    {/*<button onClick={handleAddPlayer1}>Add Player 2</button>*/}
                     <button onClick={startGame}>Start Game</button>
-                    <button onClick={deleteGame}>Delete Game</button>
+                    {/*<button onClick={deleteGame}>Delete Game</button>*/}
+                    <button onClick={() => setSelectedGame(1)}> Select Game 1</button>
+                    <button onClick={() => setSelectedGame(2)}> Select Game 2</button>
+                    <button onClick={() => setSelectedGame(3)}> Select Game 3</button>
+                    <button onClick={() => setSelectedGame(4)}> Select Game 4</button>
                 </>
         }
         // if (gameScore > 3 ) {
@@ -135,7 +143,8 @@ const HubView = (props) => {
         // else if (gameRunning === false) {
 
         // } else {
-        return <MinigameComponent gameNumber={1} switchToLobby={changeGameState}></MinigameComponent>
+        return <><MinigameComponent gameNumber={gameSelected} switchToLobby={changeGameState}></MinigameComponent>
+            <button onClick={() => setGameRunning(false)}>Stop game</button></>
 
         //
 
